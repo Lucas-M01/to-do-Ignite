@@ -1,0 +1,40 @@
+form {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 3.375rem;
+    justify-content: center;
+    margin-top: -1.6rem;
+}
+
+.task {
+    background-color: var(--gray-500);
+    border: 1px solid var(--gray-700);
+    color: var(--gray-100);
+    border-radius: 8px;
+    padding: 1rem;
+    width: 39.8rem;
+}
+
+.plus {
+    display: flex;
+    padding-left: 0.5rem;
+}
+
+.buttonCreate {
+    display: flex;
+    align-items: center;    
+    padding: 1rem;
+    border-radius: 8px;
+    border: 0;
+    cursor: pointer;
+    
+    background-color: var(--blue-dark);
+    color: var(--gray-100);
+
+    transition:  background-color 0.2s;
+}
+
+.buttonCreate:hover { 
+    background-color: var(--purple-dark)
+}
