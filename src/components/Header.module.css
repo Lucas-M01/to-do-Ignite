@@ -16,7 +16,7 @@ h1 {
     color: var(--purple-dark);
 }
 
-img {
+.rocket {
     width: 1.3rem;
     height: 2.25rem;
     margin-right: 0.75rem;
