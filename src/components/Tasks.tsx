@@ -21,13 +21,13 @@ export function Tasks({ id, content, isCompleted, onDeleteTask, onCompleteTask}:
 
     return(
         <div className={styles.tasks}>
-
+            <div className={styles.containerCheck}>
+                <div className={styles.round}>
                     <input type="checkbox" id={`${id}`} checked={isCompleted} className={styles.checkbox} onChange={()=> handleCompleteTask()} />
-
-
-
-
-
+                    <label htmlFor={`${id}`} ></label>
+                </div>
+            </div>
+                    
             <label htmlFor={`${id}`} className={isCompleted ? styles.isCompleted : styles.content}>
                 {content}
             </label>
