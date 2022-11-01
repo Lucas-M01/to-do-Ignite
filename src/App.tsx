@@ -6,6 +6,8 @@ import { Tasks } from './components/Tasks'
 import { useState, FormEvent } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import clipboard from './assets/Clipboard.svg'
+import * as Dialog from '@radix-ui/react-dialog'
+import { ModalCreateTask } from './components/ModalCreateTask'
 
 interface Task{
   id: string;
@@ -49,56 +51,63 @@ export function App() {
   return (
     <div>
       <Header />
-      <div className={styles.create}>
-        <form onSubmit={handleCreateNewTask} >
-          <input type="text" placeholder='Adicione uma tarefa' value={task} onChange={e => setTask(e.target.value)} required className={styles.task} />
-          <button type="submit" className={styles.buttonCreate}>
-            Criar
-            <div className={styles.plus}>
-              <PlusCircle size={16} />
-            </div>
-          </button>
-        </form>
-      </div>
-      <div>
+      <div className={styles.container}>
 
-      </div>
-      <div className={styles.infoTasks}>
-        <main>
-          <div className={styles.info}>
-            <p className={styles.tasksCreated}>
-              Tarefas criadas
-              <span className={styles.counter}>{taskList.length}</span>
-            </p>
+        <div className={styles.create}>
+          <form onSubmit={handleCreateNewTask} >
+            <input type="text" placeholder='Pesquise uma tarefa' value={task} onChange={e => setTask(e.target.value)} className={styles.task} />
+          </form>
+          <Dialog.Root>
+            <Dialog.DialogTrigger className={styles.buttonCreate} >
+                Criar 
+                <div className={styles.plus}>
+                  <PlusCircle size={16} />
+                </div>
+            </Dialog.DialogTrigger>
+            <ModalCreateTask />
+              
+          </Dialog.Root>
+        </div>
+        <div>
 
-            <p className={styles.taskClompleted}>
-              Concluídas 
-              <span className={styles.counter}>{completedTasks} de {taskList.length}</span>
-            </p>
-          </div>
-          {taskList.length > 0 ? (
-            <div className={styles.listTask}>
-              {taskList.map(task => {
-                return (
-                  <Tasks 
-                    key={uuidv4()}
-                    id={task.id}
-                    content={task.content}
-                    isCompleted={task.isCompleted}
-                    onCompleteTask={completeTask}
-                    onDeleteTask={deleteTask}
-                  />
-                )
-              })}
+        </div>
+        <div className={styles.infoTasks}>
+          <main>
+            <div className={styles.info}>
+              <p className={styles.tasksCreated}>
+                Tarefas criadas
+                <span className={styles.counter}>{taskList.length}</span>
+              </p>
+
+              <p className={styles.taskClompleted}>
+                Concluídas 
+                <span className={styles.counter}>{completedTasks} de {taskList.length}</span>
+              </p>
             </div>
-          ) : (
-            <div className={styles.noTasks}>
-              <img src={clipboard} />
-              <p><strong>Você ainda não tem tarefas cadastradas</strong><br/>
-              Crie tarefas e organize seus itens a fazer</p>
-            </div>
-          )}
-        </main>
+            {taskList.length > 0 ? (
+              <div className={styles.listTask}>
+                {taskList.map(task => {
+                  return (
+                    <Tasks 
+                      key={uuidv4()}
+                      id={task.id}
+                      content={task.content}
+                      isCompleted={task.isCompleted}
+                      onCompleteTask={completeTask}
+                      onDeleteTask={deleteTask}
+                    />
+                  )
+                })}
+              </div>
+            ) : (
+              <div className={styles.noTasks}>
+                <img src={clipboard} />
+                <p><strong>Você ainda não tem tarefas cadastradas</strong><br/>
+                Crie tarefas e organize seus itens a fazer</p>
+              </div>
+            )}
+          </main>
+        </div>
       </div>
     </div>
   )

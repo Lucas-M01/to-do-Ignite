@@ -1,10 +1,12 @@
-form {
+.create {
     display: flex;
     align-items: center;
-    gap: 8px;
-    height: 3.375rem;
     justify-content: center;
+    gap: 8px;
     margin-top: -1.6rem;
+    max-height: 3.375rem;
+
+    width: 100%;
 }
 
 .task {
@@ -37,6 +39,26 @@ main {
     color: var(--gray-200);
     background: var(--gray-400);
     border-radius: 999px
+}
+
+.listTask {
+    overflow: auto;
+    max-height: 25.75rem;
+}
+
+.listTask::-webkit-scrollbar {
+    width: 0.25rem;
+    height: 0.25rem; 
+}
+  
+.listTask::-webkit-scrollbar-track {
+    background: transparent;
+    padding: 2px;
+}
+  
+.listTask::-webkit-scrollbar-thumb {
+    border-radius: 16px;
+    background-color: var(--gray-400);
 }
 
 .buttonCreate {
@@ -89,4 +111,32 @@ main {
     color: var(--gray-300);
     font-size: 1rem;
     line-height: 22px;
+}
+
+@media only screen and (max-width: 768px) {
+    .container {
+        font-size: 0.75rem;
+        margin: 0 1rem 2rem 1rem;
+    }
+
+    .listTask {
+        max-height: 22rem;
+    }
+    
+    main {
+        width: 100vw;
+    }   
+
+    .listTask, .noTasks {
+        width: 100%;
+        margin-top: 1rem;
+    }
+
+    form {
+        width: 75%;
+    }
+
+    .task {
+        width: 100%;
+    }
 }

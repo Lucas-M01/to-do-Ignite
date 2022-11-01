@@ -1,4 +1,5 @@
-import { Trash } from 'phosphor-react'
+import { CheckCircle, Circle, Trash } from 'phosphor-react'
+import { useState } from 'react';
 import styles from './Tasks.module.css'
 
 interface TasksProps {
@@ -10,7 +11,6 @@ interface TasksProps {
 }
 
 export function Tasks({ id, content, isCompleted, onDeleteTask, onCompleteTask}: TasksProps){
-    
     function handleDeleteTask() {
         onDeleteTask(id)
     }
@@ -19,14 +19,24 @@ export function Tasks({ id, content, isCompleted, onDeleteTask, onCompleteTask}:
         onCompleteTask(id)
     }
 
+    let x = false
+
+    function mouseOver() {
+        x = true
+    }
+
     return(
         <div className={styles.tasks}>
-            <div className={styles.containerCheck}>
-                <div className={styles.round}>
-                    <input type="checkbox" id={`${id}`} checked={isCompleted} className={styles.checkbox} onChange={()=> handleCompleteTask()} />
-                    <label htmlFor={`${id}`} ></label>
+            
+            {isCompleted ? (
+                <div className={styles.checked}>
+                    <CheckCircle size={24} onClick={handleCompleteTask} weight="fill"   />
                 </div>
-            </div>
+            ) : (
+                <div className={styles.circleDefault}>
+                    <Circle size={24} onClick={handleCompleteTask} onMouseEnter={mouseOver}  />
+                </div>
+            )}
                     
             <label htmlFor={`${id}`} className={isCompleted ? styles.isCompleted : styles.content}>
                 {content}
