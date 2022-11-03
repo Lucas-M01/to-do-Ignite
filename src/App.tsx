@@ -1,13 +1,11 @@
 import { Header } from './components/Header'
-import { PlusCircle } from 'phosphor-react'
 import './Global.css'
 import styles from './App.module.css'
 import { Tasks } from './components/Tasks'
 import { useState, FormEvent } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import clipboard from './assets/Clipboard.svg'
-import * as Dialog from '@radix-ui/react-dialog'
-import { ModalCreateTask } from './components/ModalCreateTask'
+import { DialogRoot } from './components/DialogRoot'
 
 interface Task{
   id: string;
@@ -57,20 +55,9 @@ export function App() {
           <form onSubmit={handleCreateNewTask} >
             <input type="text" placeholder='Pesquise uma tarefa' value={task} onChange={e => setTask(e.target.value)} className={styles.task} />
           </form>
-          <Dialog.Root>
-            <Dialog.DialogTrigger className={styles.buttonCreate} >
-                Criar 
-                <div className={styles.plus}>
-                  <PlusCircle size={16} />
-                </div>
-            </Dialog.DialogTrigger>
-            <ModalCreateTask />
-              
-          </Dialog.Root>
+          <DialogRoot />
         </div>
-        <div>
-
-        </div>
+        
         <div className={styles.infoTasks}>
           <main>
             <div className={styles.info}>

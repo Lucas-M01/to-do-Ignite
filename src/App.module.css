@@ -9,6 +9,11 @@
     width: 100%;
 }
 
+form {
+    display: flex;
+    align-items: center;
+}
+
 .task {
     background-color: var(--gray-500);
     border: 1px solid var(--gray-700);
@@ -26,11 +31,6 @@ main {
     display: flex;
     justify-content: center;
     margin-top: 1rem;
-}
-
-.plus {
-    display: flex;
-    padding-left: 0.5rem;
 }
 
 .counter {
@@ -59,24 +59,6 @@ main {
 .listTask::-webkit-scrollbar-thumb {
     border-radius: 16px;
     background-color: var(--gray-400);
-}
-
-.buttonCreate {
-    display: flex;
-    align-items: center;    
-    padding: 1rem;
-    border-radius: 8px;
-    border: 0;
-    cursor: pointer;
-    
-    background-color: var(--blue-dark);
-    color: var(--gray-100);
-
-    transition:  background-color 0.2s;
-}
-
-.buttonCreate:hover { 
-    background-color: var(--purple-dark)
 }
 
 .info {

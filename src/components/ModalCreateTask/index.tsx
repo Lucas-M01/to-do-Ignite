@@ -8,9 +8,16 @@ export function ModalCreateTask(){
                 <Dialog.Content className={styles.content}>
                     <Dialog.Title>Crie uma nova tarefa</Dialog.Title>
                     
-                    <form>
-
-                        <input type="text" />
+                    <form className={styles.form}>
+                        <div className={styles.informTask}>
+                            <label htmlFor="task">Informe a tarefa</label>
+                            <input type="text" name="task" />
+                        </div>
+                        
+                        <div>
+                            <input type="text" />
+                            <input type="text" />
+                        </div>
 
                         <div className={styles.buttons}>
                             <Dialog.Close asChild>

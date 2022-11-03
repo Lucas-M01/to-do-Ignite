@@ -1,3 +1,6 @@
+
+
+
 .overlay {
     position: fixed;
     top: 0px;
@@ -7,6 +10,7 @@
     background: #000;
     opacity: 60%;
 }
+
 
 .content {
     position: fixed;
@@ -26,9 +30,23 @@
     
 }
 
+.informTask {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    background-color: var(--gray-500);
+    border: 1px solid var(--gray-700);
+    color: var(--gray-100);
+    border-radius: 8px;
+    padding: 1rem;
+}
+
 .buttons {
     display: flex;
     justify-content: space-between;
+    width: 100%;
 }
 
 .buttonCreate {
@@ -62,12 +80,16 @@
     transition: 0.4s;
 }
 
-form {
+.form {
     display: flex;
     flex-direction: column;
     margin-top: 1rem;
-    gap: 1rem;
+    
+
+    width: 100%;
 }
+
+
 
 @media only screen and (max-width: 768px) {
     .content {
