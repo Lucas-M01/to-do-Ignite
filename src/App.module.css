@@ -44,6 +44,7 @@ main {
 .listTask {
     overflow: auto;
     max-height: 25.75rem;
+    width: 46rem;
 }
 
 .listTask::-webkit-scrollbar {
@@ -121,4 +122,52 @@ main {
     .task {
         width: 100%;
     }
+}
+ 
+.tasks {
+    display: flex;
+    align-items: center;
+
+    padding: 1rem;
+    gap: 0.75rem;
+
+    background-color: var(--gray-500);
+    border: 1px solid var(--gray-400);
+    border-radius: 8px;
+    margin-top: 0.75rem;
+    width: 100%
+}
+
+.itemRoot {
+}
+
+.content {
+    color: var(--gray-100);
+}
+
+.checked {
+  color: var(--purple-dark);
+  cursor: pointer;
+}
+
+.circleDefault {
+    cursor: pointer;
+    color: var(--blue);
+}
+
+.checked:hover {
+  color:  var(--purple);
+  transition: 0.2s;
+}
+
+
+.circleDefault:hover {
+  color: var(--blue-dark);
+  transition: 0.2s;
+}
+
+.isCompleted {
+    color: var(--gray-300);
+    text-decoration: line-through;
+    width: 39.5rem;
 }

@@ -6,6 +6,8 @@ import { useState, FormEvent } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import clipboard from './assets/Clipboard.svg'
 import { DialogRoot } from './components/DialogRoot'
+import * as Accordion from '@radix-ui/react-accordion'
+import { CheckCircle, Circle } from 'phosphor-react'
 
 interface Task{
   id: string;
@@ -44,6 +46,16 @@ export function App() {
     setTaskList(editTask)
   }
 
+  function handleCompleteTask() {
+    
+  }
+
+
+  function mouseOver() {
+    let x = false
+    x = true
+  }
+
   const completedTasks = taskList.filter((task) => task.isCompleted).length 
 
   return (
@@ -75,14 +87,34 @@ export function App() {
               <div className={styles.listTask}>
                 {taskList.map(task => {
                   return (
-                    <Tasks 
-                      key={uuidv4()}
-                      id={task.id}
-                      content={task.content}
-                      isCompleted={task.isCompleted}
-                      onCompleteTask={completeTask}
-                      onDeleteTask={deleteTask}
-                    />
+                    <Accordion.Root type="single" key={uuidv4()} collapsible >
+                      <Accordion.Item value={`item-${task.id}`}>
+                        <Accordion.Trigger className={styles.tasks}>
+                          
+                          {task.isCompleted ? (
+                              <div className={styles.checked}>
+                                <CheckCircle size={24} onClick={handleCompleteTask} weight="fill"   />
+                              </div>
+                            ) : (
+                              <div className={styles.circleDefault}>
+                                <Circle size={24} onClick={handleCompleteTask} onMouseEnter={mouseOver}  />
+                              </div>
+                          )}
+                        
+                          <label htmlFor={`${task.id}`} className={task.isCompleted ? styles.isCompleted : styles.content}>
+                            {task.content}
+                          </label>
+                        </Accordion.Trigger>
+
+                        <Tasks 
+                          id={task.id}
+                          content={task.content}
+                          isCompleted={task.isCompleted}
+                          onCompleteTask={completeTask}
+                          onDeleteTask={deleteTask}
+                        />
+                      </Accordion.Item>
+                    </Accordion.Root>
                   )
                 })}
               </div>

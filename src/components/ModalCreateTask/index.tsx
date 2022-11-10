@@ -13,10 +13,17 @@ export function ModalCreateTask(){
                             <label htmlFor="task">Informe a tarefa</label>
                             <input type="text" name="task" />
                         </div>
-                        
+
                         <div>
-                            <input type="text" />
-                            <input type="text" />
+                            <div>
+                                <label htmlFor=""></label>
+                                <input type="text" />
+                            </div>
+
+                            <div>
+                                <label htmlFor=""></label>
+                                <input type="text" />
+                            </div>
                         </div>
 
                         <div className={styles.buttons}>

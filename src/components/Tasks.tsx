@@ -1,6 +1,6 @@
-import { CheckCircle, Circle, Trash } from 'phosphor-react'
-import { useState } from 'react';
+import { Trash } from 'phosphor-react'
 import styles from './Tasks.module.css'
+import * as Accordion from '@radix-ui/react-accordion'
 
 interface TasksProps {
     id: string;
@@ -15,36 +15,14 @@ export function Tasks({ id, content, isCompleted, onDeleteTask, onCompleteTask}:
         onDeleteTask(id)
     }
 
-    function handleCompleteTask() {
-        onCompleteTask(id)
-    }
-
-    let x = false
-
-    function mouseOver() {
-        x = true
-    }
-
     return(
-        <div className={styles.tasks}>
-            
-            {isCompleted ? (
-                <div className={styles.checked}>
-                    <CheckCircle size={24} onClick={handleCompleteTask} weight="fill"   />
-                </div>
-            ) : (
-                <div className={styles.circleDefault}>
-                    <Circle size={24} onClick={handleCompleteTask} onMouseEnter={mouseOver}  />
-                </div>
-            )}
-                    
-            <label htmlFor={`${id}`} className={isCompleted ? styles.isCompleted : styles.content}>
-                {content}
-            </label>
-
+        <Accordion.Content className={styles.contentAccordion}>
+            <div>
+                ,fdçflsdfdsfdfdsdasdasdsadsdsadasdsadasdasd
+            </div>
             <button className={styles.trash}>
                 <Trash size={20} onClick={handleDeleteTask} />
             </button>
-        </div>
+        </Accordion.Content>
     )
 }
