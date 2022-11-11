@@ -1,6 +1,28 @@
 .contentAccordion{
+  display: flex; 
   background-color: var(--gray-400);
-  
+  color: var(--gray-200);
+
+  justify-content: space-between;
+}
+
+.dataContent {
+  display: flex;
+  padding: 1rem;
+}
+
+.statusColorYellow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.statusColorYellow::before {
+  content: '';
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background-color: var(--yellow);
 }
 
 .trash {

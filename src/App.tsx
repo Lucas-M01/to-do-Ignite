@@ -1,5 +1,6 @@
 import { Header } from './components/Header'
-import './Global.css'
+import { ThemeProvider } from 'styled-components'
+import { GlobalStyle } from './styles/global'
 import styles from './App.module.css'
 import { Tasks } from './components/Tasks'
 import { useState, FormEvent } from 'react'
@@ -7,12 +8,15 @@ import { v4 as uuidv4 } from 'uuid'
 import clipboard from './assets/Clipboard.svg'
 import { DialogRoot } from './components/DialogRoot'
 import * as Accordion from '@radix-ui/react-accordion'
-import { CheckCircle, Circle } from 'phosphor-react'
+import { CaretDown } from 'phosphor-react'
+import { defaultTheme } from './styles/themes/default'
 
-interface Task{
-  id: string;
-  content: string;
-  isCompleted: boolean;
+interface Task {
+  id: string
+  content: string
+  isCompleted: boolean
+  startDate: Date
+  deadline?: string
 }
 
 export function App() {
@@ -21,113 +25,131 @@ export function App() {
 
   const handleCreateNewTask = (event: FormEvent) => {
     event.preventDefault()
-    if (!taskList) return; 
+    if (!taskList) return
 
     const taskId = uuidv4().toString()
-    const newTask = {id: taskId, content: task, isCompleted: false}
+    const newTask = {
+      id: taskId,
+      content: task,
+      isCompleted: false,
+      startDate: new Date(),
+    }
 
-    setTaskList(oldTask => [...oldTask,newTask])
+    setTaskList((oldTask) => [...oldTask, newTask])
     setTask('')
   }
 
   const deleteTask = (id: string) => {
-    const taskWithoutDeletedOne = taskList.filter(task => {
+    const taskWithoutDeletedOne = taskList.filter((task) => {
       return task.id !== id
     })
     setTaskList(taskWithoutDeletedOne)
   }
 
   const completeTask = (id: string) => {
-    const editTask = taskList.map(task => task.id === id ? {
-      ...task,
-      isCompleted: !task.isCompleted
-    }: task)
+    const editTask = taskList.map((task) =>
+      task.id === id
+        ? {
+            ...task,
+            isCompleted: !task.isCompleted,
+          }
+        : task,
+    )
 
     setTaskList(editTask)
   }
 
-  function handleCompleteTask() {
-    
-  }
-
+  function handleCompleteTask() {}
 
   function mouseOver() {
-    let x = false
+    let x
     x = true
   }
 
-  const completedTasks = taskList.filter((task) => task.isCompleted).length 
+  const completedTasks = taskList.filter((task) => task.isCompleted).length
 
   return (
-    <div>
-      <Header />
-      <div className={styles.container}>
+    <ThemeProvider theme={defaultTheme}>
+      <div>
+        <Header />
+        <div className={styles.container}>
+          <div className={styles.create}>
+            <form onSubmit={handleCreateNewTask}>
+              <input
+                type="text"
+                placeholder="Pesquise uma tarefa"
+                value={task}
+                onChange={(e) => setTask(e.target.value)}
+                className={styles.task}
+              />
+            </form>
+            <DialogRoot />
+          </div>
 
-        <div className={styles.create}>
-          <form onSubmit={handleCreateNewTask} >
-            <input type="text" placeholder='Pesquise uma tarefa' value={task} onChange={e => setTask(e.target.value)} className={styles.task} />
-          </form>
-          <DialogRoot />
-        </div>
-        
-        <div className={styles.infoTasks}>
-          <main>
-            <div className={styles.info}>
-              <p className={styles.tasksCreated}>
-                Tarefas criadas
-                <span className={styles.counter}>{taskList.length}</span>
-              </p>
+          <div className={styles.infoTasks}>
+            <main>
+              <div className={styles.info}>
+                <p className={styles.tasksCreated}>
+                  Tarefas criadas
+                  <span className={styles.counter}>{taskList.length}</span>
+                </p>
 
-              <p className={styles.taskClompleted}>
-                Concluídas 
-                <span className={styles.counter}>{completedTasks} de {taskList.length}</span>
-              </p>
-            </div>
-            {taskList.length > 0 ? (
-              <div className={styles.listTask}>
-                {taskList.map(task => {
-                  return (
-                    <Accordion.Root type="single" key={uuidv4()} collapsible >
-                      <Accordion.Item value={`item-${task.id}`}>
-                        <Accordion.Trigger className={styles.tasks}>
-                          
-                          {task.isCompleted ? (
-                              <div className={styles.checked}>
-                                <CheckCircle size={24} onClick={handleCompleteTask} weight="fill"   />
-                              </div>
-                            ) : (
-                              <div className={styles.circleDefault}>
-                                <Circle size={24} onClick={handleCompleteTask} onMouseEnter={mouseOver}  />
-                              </div>
-                          )}
-                        
-                          <label htmlFor={`${task.id}`} className={task.isCompleted ? styles.isCompleted : styles.content}>
-                            {task.content}
-                          </label>
-                        </Accordion.Trigger>
-
-                        <Tasks 
-                          id={task.id}
-                          content={task.content}
-                          isCompleted={task.isCompleted}
-                          onCompleteTask={completeTask}
-                          onDeleteTask={deleteTask}
-                        />
-                      </Accordion.Item>
-                    </Accordion.Root>
-                  )
-                })}
+                <p className={styles.taskClompleted}>
+                  Concluídas
+                  <span className={styles.counter}>
+                    {completedTasks} de {taskList.length}
+                  </span>
+                </p>
               </div>
-            ) : (
-              <div className={styles.noTasks}>
-                <img src={clipboard} />
-                <p><strong>Você ainda não tem tarefas cadastradas</strong><br/>
-                Crie tarefas e organize seus itens a fazer</p>
-              </div>
-            )}
-          </main>
+              {taskList.length > 0 ? (
+                <div className={styles.listTask}>
+                  {taskList.map((task) => {
+                    return (
+                      <Accordion.Root type="single" key={uuidv4()} collapsible>
+                        <Accordion.Item value={`item-${task.id}`}>
+                          <Accordion.Trigger className={styles.tasks}>
+                            <label
+                              htmlFor={`${task.id}`}
+                              className={
+                                task.isCompleted
+                                  ? styles.isCompleted
+                                  : styles.content
+                              }
+                            >
+                              {task.content}
+                            </label>
+
+                            <CaretDown size={16} className={styles.caretDown} />
+                          </Accordion.Trigger>
+
+                          <Tasks
+                            id={task.id}
+                            content={task.content}
+                            isCompleted={task.isCompleted}
+                            onCompleteTask={completeTask}
+                            onDeleteTask={deleteTask}
+                            startDate={task.startDate}
+                          />
+                        </Accordion.Item>
+                      </Accordion.Root>
+                    )
+                  })}
+                </div>
+              ) : (
+                <div className={styles.noTasks}>
+                  <img src={clipboard} />
+                  <p>
+                    <strong>Você ainda não tem tarefas cadastradas</strong>
+                    <br />
+                    Crie tarefas e organize seus itens a fazer
+                  </p>
+                </div>
+              )}
+            </main>
+          </div>
         </div>
       </div>
-    </div>
+      <GlobalStyle />
+    </ThemeProvider>
   )
 }

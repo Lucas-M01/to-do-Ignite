@@ -1,46 +1,40 @@
 import * as Dialog from '@radix-ui/react-dialog'
 import styles from './ModalCreateTask.module.css'
 
-export function ModalCreateTask(){
-    return(
-            <Dialog.Portal>
-                <Dialog.Overlay className={styles.overlay} />
-                <Dialog.Content className={styles.content}>
-                    <Dialog.Title>Crie uma nova tarefa</Dialog.Title>
-                    
-                    <form className={styles.form}>
-                        <div className={styles.informTask}>
-                            <label htmlFor="task">Informe a tarefa</label>
-                            <input type="text" name="task" />
-                        </div>
+export function ModalCreateTask() {
+  return (
+    <Dialog.Portal>
+      <Dialog.Overlay className={styles.overlay} />
+      <Dialog.Content className={styles.content}>
+        <Dialog.Title>Crie uma nova tarefa</Dialog.Title>
 
-                        <div>
-                            <div>
-                                <label htmlFor=""></label>
-                                <input type="text" />
-                            </div>
+        <form className={styles.form}>
+          <div className={styles.informTask}>
+            <label htmlFor="task">Informe a tarefa</label>
+            <input type="text" name="task" />
+          </div>
 
-                            <div>
-                                <label htmlFor=""></label>
-                                <input type="text" />
-                            </div>
-                        </div>
+          <div>
+            <div>
+              <label htmlFor=""></label>
+              <input type="text" />
+            </div>
 
-                        <div className={styles.buttons}>
-                            <Dialog.Close asChild>
-                                <button className={styles.buttonCancel} >
-                                    Cancelar
-                                </button>
-                            </Dialog.Close>
+            <div>
+              <label htmlFor=""></label>
+              <input type="text" />
+            </div>
+          </div>
 
-                            <button className={styles.buttonCreate}>
-                                Criar
-                            </button>
-                        </div>
-                    </form>
+          <div className={styles.buttons}>
+            <Dialog.Close asChild>
+              <button className={styles.buttonCancel}>Cancelar</button>
+            </Dialog.Close>
 
-
-                </Dialog.Content>
-            </Dialog.Portal>
-    )
+            <button className={styles.buttonCreate}>Criar</button>
+          </div>
+        </form>
+      </Dialog.Content>
+    </Dialog.Portal>
+  )
 }
