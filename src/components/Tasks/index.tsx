@@ -1,25 +1,15 @@
 import { Trash } from 'phosphor-react'
-import styles from './Tasks.module.css'
-import * as Accordion from '@radix-ui/react-accordion'
 import { format } from 'date-fns'
+import { AccordionContent, DataContent, Status, TrashB } from './styles'
 
 interface TasksProps {
   id: string
   content: string
-  isCompleted?: boolean
   onDeleteTask: (id: string) => void
-  onCompleteTask: (id: string) => void
   startDate: Date
 }
 
-export function Tasks({
-  id,
-  content,
-  isCompleted,
-  onDeleteTask,
-  onCompleteTask,
-  startDate,
-}: TasksProps) {
+export function Tasks({ id, content, onDeleteTask, startDate }: TasksProps) {
   function handleDeleteTask() {
     onDeleteTask(id)
   }
@@ -27,15 +17,15 @@ export function Tasks({
   const startTime = format(startDate, 'dd/MM/yyyy')
 
   return (
-    <Accordion.Content className={styles.contentAccordion}>
-      <div className={styles.dataContent}>
+    <AccordionContent>
+      <DataContent>
         <div>
           <p>Tarefa: </p>
           <p>{content}</p>
           <div>
             <p>Status: </p>
             {startDate.getTime() < new Date().getTime() && (
-              <span className={styles.statusColorYellow}>Em andamento</span>
+              <Status color="yellow-500">Em andamento</Status>
             )}
           </div>
         </div>
@@ -44,10 +34,10 @@ export function Tasks({
           <p>Data Inicio: </p>
           <p>{startTime}</p>
         </div>
-      </div>
-      <button className={styles.trash}>
+      </DataContent>
+      <TrashB>
         <Trash size={20} onClick={handleDeleteTask} />
-      </button>
-    </Accordion.Content>
+      </TrashB>
+    </AccordionContent>
   )
 }

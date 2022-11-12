@@ -1,17 +1,17 @@
 import * as Dialog from '@radix-ui/react-dialog'
 import { PlusCircle } from 'phosphor-react'
 import { ModalCreateTask } from '../ModalCreateTask'
-import styles from './DialogRoot.module.css'
+import { ButtonCreate } from './styles'
 
 export function DialogRoot() {
   return (
     <Dialog.Root>
-      <Dialog.DialogTrigger className={styles.buttonCreate}>
+      <ButtonCreate>
         Criar
-        <div className={styles.plus}>
+        <div className="plus">
           <PlusCircle size={16} />
         </div>
-      </Dialog.DialogTrigger>
+      </ButtonCreate>
       <ModalCreateTask />
     </Dialog.Root>
   )

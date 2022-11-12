@@ -1,40 +1,53 @@
 import * as Dialog from '@radix-ui/react-dialog'
-import styles from './ModalCreateTask.module.css'
+import {
+  ButtonDefault,
+  Buttons,
+  Content,
+  Input,
+  Overlay,
+  SettingsTime,
+} from './styles'
 
 export function ModalCreateTask() {
   return (
     <Dialog.Portal>
-      <Dialog.Overlay className={styles.overlay} />
-      <Dialog.Content className={styles.content}>
+      <Overlay />
+      <Content>
         <Dialog.Title>Crie uma nova tarefa</Dialog.Title>
 
-        <form className={styles.form}>
-          <div className={styles.informTask}>
+        <form>
+          <div className="informTask">
             <label htmlFor="task">Informe a tarefa</label>
-            <input type="text" name="task" />
+            <Input type="text" name="task" />
           </div>
 
-          <div>
+          <SettingsTime>
             <div>
-              <label htmlFor=""></label>
-              <input type="text" />
+              <label htmlFor="startDate">Data inicio:</label>
+              <Input type="date" name="startDate" />
             </div>
 
             <div>
-              <label htmlFor=""></label>
-              <input type="text" />
+              <label htmlFor="deadline">Data limite:</label>
+              <Input type="date" name="deadline" />
             </div>
-          </div>
+          </SettingsTime>
 
-          <div className={styles.buttons}>
+          <Buttons>
             <Dialog.Close asChild>
-              <button className={styles.buttonCancel}>Cancelar</button>
+              <ButtonDefault
+                color="danger-dark"
+                colorHover="hoverRed"
+                className="buttonCancel"
+              >
+                Cancelar
+              </ButtonDefault>
             </Dialog.Close>
 
-            <button className={styles.buttonCreate}>Criar</button>
-          </div>
+            <ButtonDefault className="buttonCreate">Criar</ButtonDefault>
+          </Buttons>
         </form>
-      </Dialog.Content>
+      </Content>
     </Dialog.Portal>
   )
 }
