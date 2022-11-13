@@ -1,12 +1,9 @@
-import { Tasks } from '../../components/Tasks'
 import { useState } from 'react'
-import { v4 as uuidv4 } from 'uuid'
 import clipboard from '../../assets/Clipboard.svg'
-
-import { CaretDown } from 'phosphor-react'
-import { HomeContainer, HomeMain, ListTasks } from './styles'
+import { HomeContainer, HomeMain, NoTask } from './styles'
 import { RegularText } from '../../components/Typography'
 import { SearchInput } from './components/SearchInput'
+import { ListTasks } from './components/ListTasks'
 
 export interface Task {
   id: string
@@ -32,18 +29,20 @@ export function Home() {
     setTaskList(editTask)
   }
 
+  console.log(completeTask)
+
   const completedTasks = taskList.filter((task) => task.isCompleted).length
   return (
     <HomeContainer>
       <SearchInput />
       <HomeMain>
         <header>
-          <RegularText className="tasksCreated">
+          <RegularText size="s" colors="blue" className="tasksCreated">
             Tarefas criadas
             <span className="counter">{taskList.length}</span>
           </RegularText>
 
-          <RegularText className="taskClompleted">
+          <RegularText size="s" colors="purple" className="taskClompleted">
             Concluídas
             <span className="counter">
               {completedTasks} de {taskList.length}
@@ -53,14 +52,14 @@ export function Home() {
         {taskList.length > 0 ? (
           <ListTasks />
         ) : (
-          <div className={styles.noTasks}>
+          <NoTask>
             <img src={clipboard} />
-            <p>
+            <RegularText color="300">
               <strong>Você ainda não tem tarefas cadastradas</strong>
               <br />
               Crie tarefas e organize seus itens a fazer
-            </p>
-          </div>
+            </RegularText>
+          </NoTask>
         )}
       </HomeMain>
     </HomeContainer>

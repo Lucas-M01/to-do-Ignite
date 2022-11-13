@@ -18,7 +18,7 @@ export function ListTasks() {
     <ListTasksContainer>
       {taskList.map((task) => {
         return (
-          <Accordion.Root type="single" key={uuidv4()} collapsible>
+          <Accordion.Root type="single" key={1} collapsible>
             <Accordion.Item value={`item-${task.id}`}>
               <AccordionTasks>
                 <label htmlFor={`${task.id}`}>{task.content}</label>

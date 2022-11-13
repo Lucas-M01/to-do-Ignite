@@ -18,13 +18,13 @@ export function ModalCreateTask() {
         <form>
           <div className="informTask">
             <label htmlFor="task">Informe a tarefa</label>
-            <Input type="text" name="task" />
+            <Input type="text" name="task" placeholder="Estudar..." />
           </div>
 
           <SettingsTime>
             <div>
               <label htmlFor="startDate">Data inicio:</label>
-              <Input type="date" name="startDate" />
+              <Input type="date" name="startDate"  />
             </div>
 
             <div>

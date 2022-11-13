@@ -53,15 +53,7 @@ main {
 }
 
 .noTasks{
-    display: flex;
-    width: 46rem;
-    height: 15.25rem;
-    align-items: center;
-    margin-top: 1.5rem;
-    flex-direction: column;
-    justify-content: center;
-    border-top: 1px solid var(--gray-400);
-    border-radius: 8px;
+    
 }
 
 .noTasks p{
@@ -86,8 +78,7 @@ main {
     }   
 
     .listTask, .noTasks {
-        width: 100%;
-        margin-top: 1rem;
+        
     }
 
     form {
