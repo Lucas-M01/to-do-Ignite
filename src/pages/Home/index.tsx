@@ -1,37 +1,23 @@
-import { useState } from 'react'
+import { useContext } from 'react'
 import clipboard from '../../assets/Clipboard.svg'
-import { HomeContainer, HomeMain, NoTask } from './styles'
+import {
+  AccordionTasks,
+  HomeContainer,
+  HomeMain,
+  ListTasksContainer,
+  NoTask,
+} from './styles'
 import { RegularText } from '../../components/Typography'
 import { SearchInput } from './components/SearchInput'
-import { ListTasks } from './components/ListTasks'
-
-export interface Task {
-  id: string
-  content: string
-  isCompleted: boolean
-  startDate: Date
-  deadline?: string
-}
+import * as Accordion from '@radix-ui/react-accordion'
+import { CaretDown } from 'phosphor-react'
+import { Tasks } from '../../components/Tasks'
+import { TasksContext } from '../../contexts/TasksContext'
 
 export function Home() {
-  const [taskList, setTaskList] = useState<Task[]>([])
+  const { tasks } = useContext(TasksContext)
 
-  const completeTask = (id: string) => {
-    const editTask = taskList.map((task) =>
-      task.id === id
-        ? {
-            ...task,
-            isCompleted: !task.isCompleted,
-          }
-        : task,
-    )
-
-    setTaskList(editTask)
-  }
-
-  console.log(completeTask)
-
-  const completedTasks = taskList.filter((task) => task.isCompleted).length
+  const completedTasks = tasks.filter((task) => task.isCompleted).length
   return (
     <HomeContainer>
       <SearchInput />
@@ -39,18 +25,40 @@ export function Home() {
         <header>
           <RegularText size="s" colors="blue" className="tasksCreated">
             Tarefas criadas
-            <span className="counter">{taskList.length}</span>
+            <span className="counter">{tasks.length}</span>
           </RegularText>
 
           <RegularText size="s" colors="purple" className="taskClompleted">
             Concluídas
             <span className="counter">
-              {completedTasks} de {taskList.length}
+              {completedTasks} de {tasks.length}
             </span>
           </RegularText>
         </header>
-        {taskList.length > 0 ? (
-          <ListTasks />
+        {tasks.length > 0 ? (
+          <ListTasksContainer>
+            {tasks.map((task) => {
+              return (
+                <Accordion.Root key={task.id} type="single" collapsible>
+                  <Accordion.Item value={`item-${task.id}`}>
+                    <AccordionTasks>
+                      <label htmlFor={`${task.id}`}>{task.task}</label>
+
+                      <CaretDown size={16} className="caretDown" />
+                    </AccordionTasks>
+
+                    <Tasks
+                      id={task.id}
+                      content={task.task}
+                      startDate={task.startDate}
+                      deadline={task.deadline}
+                      isCompleted={task.isCompleted}
+                    />
+                  </Accordion.Item>
+                </Accordion.Root>
+              )
+            })}
+          </ListTasksContainer>
         ) : (
           <NoTask>
             <img src={clipboard} alt="" />
