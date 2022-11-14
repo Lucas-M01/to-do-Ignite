@@ -53,7 +53,7 @@ export function Home() {
           <ListTasks />
         ) : (
           <NoTask>
-            <img src={clipboard} />
+            <img src={clipboard} alt="" />
             <RegularText color="300">
               <strong>Você ainda não tem tarefas cadastradas</strong>
               <br />

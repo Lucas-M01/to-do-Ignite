@@ -1,4 +1,5 @@
 import * as Dialog from '@radix-ui/react-dialog'
+import * as Checkbox from '@radix-ui/react-checkbox'
 import styled from 'styled-components'
 
 export const Overlay = styled(Dialog.Overlay)`
@@ -36,11 +37,8 @@ export const Content = styled(Dialog.Content)`
     .informTask {
       display: flex;
       flex-direction: column;
+      gap: 0.75rem;
       margin-bottom: 0.5rem;
-
-      label {
-        margin-bottom: 0.5rem;
-      }
     }
   }
 
@@ -51,7 +49,15 @@ export const Content = styled(Dialog.Content)`
 
 export const SettingsTime = styled.div`
   display: flex;
+  justify-content: space-between;
   gap: 0.5rem;
+  margin-bottom: 1rem;
+
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
 `
 
 interface InputProps {
@@ -65,6 +71,11 @@ export const Input = styled.input<InputProps>`
   border-radius: 8px;
   padding: 1rem;
   width: ${({ width }) => width ?? '2rem'};
+
+  &:disabled {
+    overflow: 'hidden';
+    display: none;
+  }
 `
 
 export const Buttons = styled.div`
@@ -91,4 +102,21 @@ export const ButtonDefault = styled.button<ButtonProps>`
     background: ${({ theme, colorHover }) => theme[colorHover ?? 'blue']};
     transition: 0.4s;
   }
+`
+
+export const Verified = styled(Checkbox.Root)`
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  border: 1px solid ${({ theme }) => theme['gray-700']};
+  width: 1.5rem;
+  height: 1.5rem;
+  background: ${({ theme }) => theme['gray-500']};
+
+  color: ${({ theme }) => theme.green};
+`
+
+export const DivCheck = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 `
